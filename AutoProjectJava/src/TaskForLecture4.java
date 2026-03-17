@@ -1,11 +1,12 @@
 import java.util.Scanner;
 
-public class Task1ForLecture4 {
+public class TaskForLecture4 {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please enter your score: ");
+        //Task1
+        System.out.print("Please enter your score: ");
         int score = scanner.nextInt();
 
         while (score < 0 || score > 100) {
@@ -27,5 +28,31 @@ public class Task1ForLecture4 {
         } else {
             System.out.println("Your grade is F!");
         }
+        scanner.nextLine();
+
+        // Task 2
+        String userInput = "";
+
+        while (!userInput.trim().equalsIgnoreCase("exit")) {
+            System.out.print("Please enter exit: ");
+            userInput = scanner.nextLine();
+        }
+        System.out.println("Exit!");
+
+        //Task 3
+        System.out.print("Please enter a number: ");
+        int x = scanner.nextInt();
+        int sum = 0;
+
+        for (int i = 0; i <= Math.abs(x); i++) {
+            sum += i;
+        }
+
+        if (x < 0) {
+            sum *= -1;
+        }
+
+        System.out.printf("The sum of all numbers from 0 to %d is %d", x, sum);
+        scanner.close();
     }
 }
