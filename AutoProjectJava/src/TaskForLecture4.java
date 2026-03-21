@@ -13,6 +13,7 @@ public class TaskForLecture4 {
             System.out.println("Incorrect value was entered");
             System.out.print("Please enter your score: ");
             score = scanner.nextInt();
+            scanner.nextLine();
         }
 
         if (score >= 90) {
@@ -28,15 +29,15 @@ public class TaskForLecture4 {
         } else {
             System.out.println("Your grade is F!");
         }
-        scanner.nextLine();
 
         // Task 2
-        String userInput = "";
+        String userInput;
 
-        while (!userInput.trim().equalsIgnoreCase("exit")) {
+        do {
             System.out.print("Please enter exit: ");
             userInput = scanner.nextLine();
         }
+        while (!userInput.trim().equalsIgnoreCase("exit"));
         System.out.println("Exit!");
 
         //Task 3
