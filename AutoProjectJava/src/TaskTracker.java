@@ -3,13 +3,11 @@ import java.util.Scanner;
 public class TaskTracker {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Task[] tasks = new Task[10];
+        int menuPoint;
+        int taskCount = 0;
 
         printHello();
-
-        int menuPoint;
-        Task[] tasks = new Task[10];
-        int taskCount = 0;
-        String titleTask = "";
 
         do {
             printMenu();
@@ -17,19 +15,17 @@ public class TaskTracker {
             scanner.nextLine();
 
             switch (menuPoint) {
-                case 1 -> titleTask = enterTitleTask(scanner);
-                case 2 -> {
-                    enterDescriptionAndPriority(scanner, tasks, taskCount, titleTask);
+                case 1 -> {
+                    enterTask(scanner, tasks, taskCount);
                     taskCount++;
                 }
+                case 2 -> printInfoTask(tasks, taskCount);
                 case 0 -> enterExit();
                 default -> incorrectMenu();
             }
         }
         while (menuPoint != 0);
         scanner.close();
-
-        printInfoTask(tasks, taskCount);
     }
 
     public static void printHello() {
@@ -37,15 +33,13 @@ public class TaskTracker {
     }
 
     public static void printMenu() {
-        System.out.print("Меню :\n1 - Ввести задачу;\n2 - Ввести информацию о задачах;\n0 - Выход\nВыберите действие: ");
+        System.out.print("Меню :\n1 - Ввести задачу;\n2 - Вывести информацию о задачах;\n0 - Выход\nВыберите действие: ");
     }
 
-    public static String enterTitleTask(Scanner scanner) {
+    public static void enterTask(Scanner scanner, Task[] tasks, int taskCount) {
         System.out.print("Введите название задачи: ");
-        return scanner.nextLine();
-    }
+        String titleTask = scanner.nextLine();
 
-    public static void enterDescriptionAndPriority(Scanner scanner, Task[] tasks, int taskCount, String titleTask) {
         System.out.print("Введите описание задачи: ");
         String descriptionTask = scanner.nextLine();
 
