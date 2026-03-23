@@ -17,7 +17,6 @@ public class WordValues {
     }
 
     public static void main(String[] args) {
-        // Передаём строку в метод solve
         String[] input = new String[]{"abc", "abc abc"};
         int[] result = nameValue(input);
         System.out.println(result);

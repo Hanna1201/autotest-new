@@ -16,7 +16,6 @@ public class ConverteStrLowerOrUpperCase {
     }
 
     public static void main(String[] args) {
-        // Передаём строку в метод solve
         String input1 = "HelLo";
         String result1 = solve(input1);
         System.out.println(result1);
