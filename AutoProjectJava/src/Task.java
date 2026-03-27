@@ -1,24 +1,13 @@
-public class Task {
+public class Task extends Issue {
 
-    private String titleTask;
-    private String descriptionTask;
-    private int priorityTask;
+    private int estimateHours;
+    private String deadline;
+    private String component;
 
-    public Task(String titleTask, String descriptionTask, int priorityTask) {
-        this.titleTask = titleTask;
-        this.descriptionTask = descriptionTask;
-        this.priorityTask = priorityTask;
-    }
-
-    public String getTitleTask() {
-        return titleTask;
-    }
-
-    public String getDescriptionTask() {
-        return descriptionTask;
-    }
-
-    public int getPriorityTask() {
-        return priorityTask;
+    public Task(String title, String description, int priority, int estimateHours, String deadline, String component) {
+        super(title, description, priority);
+        this.estimateHours = estimateHours;
+        this.deadline = deadline;
+        this.component = component;
     }
 }

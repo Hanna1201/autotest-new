@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class TaskTracker {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Task[] tasks = new Task[10];
+        Issue[] issues = new Issue[10];
         int menuPoint;
         int taskCount = 0;
 
@@ -16,10 +16,10 @@ public class TaskTracker {
 
             switch (menuPoint) {
                 case 1 -> {
-                    enterTask(scanner, tasks, taskCount);
+                    enterTask(scanner, issues, taskCount);
                     taskCount++;
                 }
-                case 2 -> printInfoTask(tasks, taskCount);
+                case 2 -> printInfoTask(issues, taskCount);
                 case 0 -> enterExit();
                 default -> incorrectMenu();
             }
@@ -36,18 +36,18 @@ public class TaskTracker {
         System.out.print("Меню :\n1 - Ввести задачу;\n2 - Вывести информацию о задачах;\n0 - Выход\nВыберите действие: ");
     }
 
-    public static void enterTask(Scanner scanner, Task[] tasks, int taskCount) {
+    public static void enterTask(Scanner scanner, Issue[] issues, int taskCount) {
         System.out.print("Введите название задачи: ");
-        String titleTask = scanner.nextLine();
+        String title = scanner.nextLine();
 
         System.out.print("Введите описание задачи: ");
-        String descriptionTask = scanner.nextLine();
+        String description = scanner.nextLine();
 
         System.out.print("Введите приоритет задачи: ");
-        int priorityTask = scanner.nextInt();
+        int priority = scanner.nextInt();
         scanner.nextLine();
 
-        tasks[taskCount] = new Task(titleTask, descriptionTask, priorityTask);
+        issues[taskCount] = new Issue(title, description, priority);
     }
 
     public static void enterExit() {
@@ -58,10 +58,10 @@ public class TaskTracker {
         System.out.println("Неверный пункт меню");
     }
 
-    public static void printInfoTask(Task[] tasks, int taskCount) {
+    public static void printInfoTask(Issue[] issues, int taskCount) {
         for (int i = 0; i < taskCount; i++) {
             System.out.printf("Задача: %s\nОписание: %s\nПриоритет: %d\n--------\n",
-                    tasks[i].getTitleTask(), tasks[i].getDescriptionTask(), tasks[i].getPriorityTask());
+                    issues[i].getTitleTask(), issues[i].getDescriptionTask(), issues[i].getPriorityTask());
         }
     }
 }
