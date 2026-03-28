@@ -1,4 +1,4 @@
-public abstract class Issue{
+public abstract class Issue {
     protected String title;
     protected String description;
     protected int priority;
@@ -11,22 +11,7 @@ public abstract class Issue{
         this.status = status;
     }
 
-    public String getTitleTask() {
-        return title;
-    }
-
-    public String getDescriptionTask() {
-        return description;
-    }
-
-    public int getPriorityTask() {
-        return priority;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
     public abstract String getDataForFW();
+
     public abstract void printInfoTask();
 }

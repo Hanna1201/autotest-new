@@ -55,72 +55,72 @@ public class TaskTracker {
         Issue issue = null;
 
         switch (typeIssue) {
-            case 1 -> {
-                System.out.print("Введите важность: ");
-                String severity = scanner.nextLine();
-
-                System.out.print("Введите шаги воспроизведения: ");
-                String stepsToReproduce = scanner.nextLine();
-
-                System.out.print("Введите фактический результат: ");
-                String actualResult = scanner.nextLine();
-
-                System.out.print("Введите ожидаемый результат: ");
-                String expectedResult = scanner.nextLine();
-
-                issue = new Bug(title, description, priority, status,
-                        severity, stepsToReproduce, actualResult, expectedResult);
-            }
-            case 2 -> {
-                System.out.print("Введите acceptance criteria: ");
-                String acceptanceCriteria = scanner.nextLine();
-
-                System.out.print("Введите story points: ");
-                int storyPoints = scanner.nextInt();
-                scanner.nextLine();
-
-                issue = new Story(title, description, priority, status,
-                        acceptanceCriteria, storyPoints);
-            }
-            case 3 -> {
-                System.out.print("Введите эстимацию в часах: ");
-                int estimateHours = scanner.nextInt();
-                scanner.nextLine();
-
-                System.out.print("Введите deadline: ");
-                String deadline = scanner.nextLine();
-
-                System.out.print("Введите компонент: ");
-                String component = scanner.nextLine();
-
-                issue = new Task(title, description, priority, status,
-                        estimateHours, deadline, component);
-            }
+            case 1 -> issue = createBug(scanner, title, description, priority, status);
+            case 2 -> issue = createStory(scanner, title, description, priority, status);
+            case 3 -> issue = createTask(scanner, title, description, priority, status);
             default -> incorrectPoint();
         }
 
         issues.add(issue);
-
-        FileWriter file = new FileWriter("/Users/leonidkovaliou/Documents/autotest-new/AutoProjectJava/issues.txt", false);
-
-        for (Issue myIssue : issues) {
-            file.write(myIssue.getDataForFW());
-        }
-        file.close();
+        saveIssuesToFile(issues);
     }
 
     public static Status readStatus(Scanner scanner) {
         System.out.print("1 - TO_DO\n2 - IN_PROGRESS\n3 - DONE\nВыберите статус: ");
 
-        int statusChoice = scanner.nextInt();
+        int status = scanner.nextInt();
         scanner.nextLine();
 
-        return switch (statusChoice) {
+        return switch (status) {
             case 1 -> Status.TO_DO;
             case 2 -> Status.IN_PROGRESS;
             case 3 -> Status.DONE;
             default -> Status.TO_DO;
         };
+    }
+
+    public static Bug createBug(Scanner scanner, String title, String description, int priority, Status status) {
+        System.out.print("Введите важность: ");
+        String severity = scanner.nextLine();
+
+        System.out.print("Введите шаги воспроизведения: ");
+        String stepsToReproduce = scanner.nextLine();
+
+        System.out.print("Введите фактический результат: ");
+        String actualResult = scanner.nextLine();
+
+        System.out.print("Введите ожидаемый результат: ");
+        String expectedResult = scanner.nextLine();
+
+        return new Bug(title, description, priority, status,
+                severity, stepsToReproduce, actualResult, expectedResult);
+    }
+
+    public static Story createStory(Scanner scanner, String title, String description, int priority, Status status) {
+        System.out.print("Введите acceptance criteria: ");
+        String acceptanceCriteria = scanner.nextLine();
+
+        System.out.print("Введите story points: ");
+        int storyPoints = scanner.nextInt();
+        scanner.nextLine();
+
+        return new Story(title, description, priority, status,
+                acceptanceCriteria, storyPoints);
+    }
+
+    public static Task createTask(Scanner scanner, String title, String description, int priority, Status status) {
+        System.out.print("Введите эстимацию в часах: ");
+        int estimateHours = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Введите deadline: ");
+        String deadline = scanner.nextLine();
+
+        System.out.print("Введите компонент: ");
+        String component = scanner.nextLine();
+
+        return new Task(title, description, priority, status,
+                estimateHours, deadline, component);
     }
 
     public static void enterExit() {
@@ -129,6 +129,15 @@ public class TaskTracker {
 
     public static void incorrectPoint() {
         System.out.println("Выбран неверный пункт");
+    }
+
+    public static void saveIssuesToFile(ArrayList<Issue> issues) throws IOException {
+        FileWriter file = new FileWriter("/Users/leonidkovaliou/Documents/autotest-new/AutoProjectJava/issues.txt", false);
+
+        for (Issue issue : issues) {
+            file.write(issue.getDataForFW());
+        }
+        file.close();
     }
 
     public static void printInfoTask(ArrayList<Issue> issues) {

@@ -14,16 +14,18 @@ public class Bug extends Issue {
         this.expectedResult = expectedResult;
     }
 
-    @Override
-    public void printInfoTask() {
-        System.out.printf("BUG, %s, %s, %d, %s, %s, %s, %s, %s\n-------\n",
-                title, description, priority, status, severity, stepsToReproduce, actualResult, expectedResult);
-    }
-
-    @Override
-    public String getDataForFW() {
+    public String messageBug() {
         return String.format("BUG, %s, %s, %d, %s, %s, %s, %s, %s\n-------\n",
                 title, description, priority, status, severity, stepsToReproduce, actualResult, expectedResult);
     }
 
+    @Override
+    public void printInfoTask() {
+        System.out.println(messageBug());
+    }
+
+    @Override
+    public String getDataForFW() {
+        return messageBug();
+    }
 }

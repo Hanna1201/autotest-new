@@ -1,4 +1,4 @@
-public class Story extends Issue  {
+public class Story extends Issue {
     private int storyPoints;
     private String acceptanceCriteria;
 
@@ -9,15 +9,18 @@ public class Story extends Issue  {
         this.storyPoints = storyPoints;
     }
 
-    @Override
-    public void printInfoTask() {
-        System.out.printf("Story %s, %s, %d, %s, %s, %d\n-------\n" ,
+    public String messageStory() {
+        return String.format("Story %s, %s, %d, %s, %s, %d\n-------\n",
                 title, description, priority, status, acceptanceCriteria, storyPoints);
     }
 
     @Override
+    public void printInfoTask() {
+        System.out.println(messageStory());
+    }
+
+    @Override
     public String getDataForFW() {
-        return String.format("Story %s, %s, %d, %s, %s, %d\n-------\n",
-                title, description, priority, status, acceptanceCriteria, storyPoints);
+        return messageStory();
     }
 }

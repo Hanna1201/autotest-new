@@ -11,15 +11,18 @@ public class Task extends Issue {
         this.component = component;
     }
 
-    @Override
-    public void printInfoTask() {
-        System.out.printf("TASK %s, %s, %d, %s, %d, %s, %s\n-------\n",
+    public String messageTask() {
+        return String.format("TASK %s, %s, %d, %s, %d, %s, %s\n-------\n",
                 title, description, priority, status, estimateHours, deadline, component);
     }
 
     @Override
+    public void printInfoTask() {
+        System.out.println(messageTask());
+    }
+
+    @Override
     public String getDataForFW() {
-        return String.format("TASK %s, %s, %d, %s, %d, %s, %s\n-------\n",
-                title, description, priority, status, estimateHours, deadline, component);
+        return messageTask();
     }
 }
