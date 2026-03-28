@@ -22,8 +22,7 @@ public class TaskTracker {
                 case 0 -> enterExit();
                 default -> incorrectPoint();
             }
-        }
-        while (menuPoint != 0);
+        } while (menuPoint != 0);
         scanner.close();
     }
 
@@ -132,7 +131,7 @@ public class TaskTracker {
     }
 
     public static void saveIssuesToFile(ArrayList<Issue> issues) throws IOException {
-        FileWriter file = new FileWriter("/Users/leonidkovaliou/Documents/autotest-new/AutoProjectJava/issues.txt", false);
+        FileWriter file = new FileWriter("issues.txt", false);
 
         for (Issue issue : issues) {
             file.write(issue.getDataForFW());
@@ -141,8 +140,6 @@ public class TaskTracker {
     }
 
     public static void printInfoTask(ArrayList<Issue> issues) {
-        for (Issue issue : issues) {
-            issue.printInfoTask();
-        }
+        issues.stream().forEach(Issue::printInfoTask);
     }
 }
