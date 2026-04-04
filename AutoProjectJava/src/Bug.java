@@ -1,11 +1,11 @@
 public class Bug extends Issue {
-    private String severity;
+    private Severity severity;
     private String stepsToReproduce;
     private String actualResult;
     private String expectedResult;
 
     public Bug(String title, String description, int priority, Status status,
-               String severity, String stepsToReproduce,
+               Severity severity, String stepsToReproduce,
                String actualResult, String expectedResult) {
         super(title, description, priority, status);
         this.severity = severity;

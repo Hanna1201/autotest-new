@@ -79,8 +79,8 @@ public class TaskTracker {
     }
 
     public static Bug createBug(Scanner scanner, String title, String description, int priority, Status status) {
-        System.out.print("Введите важность: ");
-        String severity = scanner.nextLine();
+
+        Severity severity = readSeverity(scanner);
 
         System.out.print("Введите шаги воспроизведения: ");
         String stepsToReproduce = scanner.nextLine();
@@ -93,6 +93,21 @@ public class TaskTracker {
 
         return new Bug(title, description, priority, status,
                 severity, stepsToReproduce, actualResult, expectedResult);
+    }
+
+    public static Severity readSeverity(Scanner scanner) {
+        System.out.print("1 - BLOCKER\n2 - MAJOR\n3 - MEDIUM\n4 - MINOR\nВыберите важность: ");
+
+        int severity = scanner.nextInt();
+        scanner.nextLine();
+
+        return switch (severity) {
+            case 1 -> Severity.BLOCKER;
+            case 2 -> Severity.MAJOR;
+            case 3 -> Severity.MEDIUM;
+            case 4 -> Severity.MINOR;
+            default -> Severity.MEDIUM;
+        };
     }
 
     public static Story createStory(Scanner scanner, String title, String description, int priority, Status status) {
