@@ -1,24 +1,28 @@
-public class Task {
+public class Task extends Issue {
 
-    private String titleTask;
-    private String descriptionTask;
-    private int priorityTask;
+    private int estimateHours;
+    private String deadline;
+    private String component;
 
-    public Task(String titleTask, String descriptionTask, int priorityTask) {
-        this.titleTask = titleTask;
-        this.descriptionTask = descriptionTask;
-        this.priorityTask = priorityTask;
+    public Task(String title, String description, int priority, Status status, int estimateHours, String deadline, String component) {
+        super(title, description, priority, status);
+        this.estimateHours = estimateHours;
+        this.deadline = deadline;
+        this.component = component;
     }
 
-    public String getTitleTask() {
-        return titleTask;
+    public String messageTask() {
+        return String.format("TASK %s, %s, %d, %s, %d, %s, %s\n-------\n",
+                title, description, priority, status, estimateHours, deadline, component);
     }
 
-    public String getDescriptionTask() {
-        return descriptionTask;
+    @Override
+    public void printInfoTask() {
+        System.out.println(messageTask());
     }
 
-    public int getPriorityTask() {
-        return priorityTask;
+    @Override
+    public String getDataForFW() {
+        return messageTask();
     }
 }
