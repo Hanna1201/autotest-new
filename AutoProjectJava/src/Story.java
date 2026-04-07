@@ -10,7 +10,7 @@ public class Story extends Issue {
     }
 
     public String messageStory() {
-        return String.format("Story %s, %s, %d, %s, %s, %d\n-------\n",
+        return String.format("STORY/%s/%s/%d/%s/%s/%d",
                 title, description, priority, status, acceptanceCriteria, storyPoints);
     }
 

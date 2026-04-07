@@ -15,7 +15,7 @@ public class Bug extends Issue {
     }
 
     public String messageBug() {
-        return String.format("BUG, %s, %s, %d, %s, %s, %s, %s, %s\n-------\n",
+        return String.format("BUG/%s/%s/%d/%s/%s/%s/%s/%s",
                 title, description, priority, status, severity, stepsToReproduce, actualResult, expectedResult);
     }
 

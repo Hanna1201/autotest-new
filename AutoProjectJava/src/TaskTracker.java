@@ -1,12 +1,16 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskTracker {
+    private static final String FILE_NAME = "issues.txt";
+
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Issue> issues = new ArrayList<>();
+        ArrayList<Issue> issues = readIssueFromFile();
         int menuPoint;
 
         printHello();
@@ -145,11 +149,50 @@ public class TaskTracker {
         System.out.println("Выбран неверный пункт");
     }
 
+    public static ArrayList<Issue> readIssueFromFile() throws FileNotFoundException {
+        ArrayList<Issue> issues = new ArrayList<>();
+
+        Scanner scanner = new Scanner(new File(FILE_NAME));
+
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+
+            String[] substring = line.split("/");
+            String type = substring[0];
+            String title = substring[1];
+            String description = substring[2];
+            int priority = Integer.parseInt(substring[3]);
+            Status status = Status.valueOf(substring[4]);
+
+            Issue issue = null;
+
+            switch (type) {
+                case "BUG":
+                    Severity severity = Severity.valueOf(substring[5]);
+                    issue = new Bug(title, description, priority, status,
+                            severity, substring[6], substring[7], substring[8]);
+                    break;
+
+                case "STORY":
+                    issue = new Story(title, description, priority, status,
+                            substring[5], Integer.parseInt(substring[6]));
+                    break;
+
+                case "TASK":
+                    issue = new Task(title, description, priority, status,
+                            Integer.parseInt(substring[5]), substring[6], substring[7]);
+                    break;
+            }
+            issues.add(issue);
+        }
+        return issues;
+    }
+
     public static void saveIssuesToFile(ArrayList<Issue> issues) throws IOException {
-        FileWriter file = new FileWriter("issues.txt", false);
+        FileWriter file = new FileWriter(FILE_NAME, false);
 
         for (Issue issue : issues) {
-            file.write(issue.getDataForFW());
+            file.write(issue.getDataForFW() + "\n");
         }
         file.close();
     }
