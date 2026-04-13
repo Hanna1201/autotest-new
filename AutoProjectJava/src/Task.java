@@ -12,7 +12,7 @@ public class Task extends Issue {
     }
 
     public String messageTask() {
-        return String.format("TASK %s, %s, %d, %s, %d, %s, %s\n-------\n",
+        return String.format("TASK/%s/%s/%d/%s/%d/%s/%s",
                 title, description, priority, status, estimateHours, deadline, component);
     }
 
